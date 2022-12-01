@@ -11,6 +11,9 @@ class Immeuble:
 
     #On crée des méthodes pour récuperer les attributs de la class.
     def get_etage(self):
+        """
+        La méthode renvoie le nombre d'étage passé en paramettre depuis la création de l'objet Immeuble.
+        """
         return self.etages
 
     def get_position(self):
