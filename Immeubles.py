@@ -32,17 +32,18 @@ class Immeuble:
         setposition(position[0], position[1])
         pendown()
 
-    def triangle(self, x: int, color: str):
+    def triangle(self, color: str):
         """
-        Prend en paramètre un str, color et int, longueur du coté.
-        Dessine un triangle équilatéral de coté x
-        Correspond aux toits sur le dessin
+        Prend en paramettre une couleur et dessine un toit sous dorme d'un triangle non-equilatéral.
         """
         begin_fill()
         fillcolor(color)
-        for i in range(3):
-            forward(x)
-            left(120)
+        forward(110)
+        left(140)
+        forward(72)
+        left(80)
+        forward(72)
+        left(140)
         end_fill()
 
     def fenetre(self):
@@ -190,14 +191,14 @@ class Immeuble:
                 else:                       #Une chance sur deux de dessiner une porte arrondie
                     self.move((pos()[0] + 25 * randint(1,3) , pos()[1]+30)) 
                     self.porte_en_arc(30, color)
-            self.move((self.get_position()[0], self.get_position()[1] + 50 + 50*i))
+            self.move((self.get_position()[0] - 5, self.get_position()[1] + 50 + 50*i))
         
         #On laisse une chance sur deux de généré un toit en triangle, sinon une térasse
         color = choice(['#430C05', '#D46F4D', '#FFBF66', '#08C5D1', '#00353F'])
-        if choice([True, False]):
-            self.rectangle(100, 10, color)
+        if choice([False, True]):
+            self.rectangle(110, 10, color)
         else:
-            self.triangle(100, color)
+            self.triangle(color)
 
 
 
@@ -303,7 +304,7 @@ class Ville:
         """
         La méthode dessine la ville en appellant la méthode de la class Immeuble pour dessiner 1 à 1 les Immeubles.
         """
-        self.floor(self.nb_batiments) #On dessine le sol.
+        #self.floor(self.nb_batiments) #On dessine le sol.
         isboulangerie = 0   #Initialise le nb de boulangerie à 0
         self.init((self.immeuble.get_position()[0], self.immeuble.get_position()[1]))
         for i in range(self.nb_batiments):
