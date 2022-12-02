@@ -2,8 +2,6 @@ from turtle import *
 from Immeubles import *
 from random import randint
 
-#Train lol xd hahaha
-
 #On génère une ville, de 6 batiments, d'une hauteur entre 3 et 5, en partant des coordonées (-300, -200)
 Ville(
     6,
