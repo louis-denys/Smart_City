@@ -284,6 +284,21 @@ class Ville:
         end_fill()
         left(90)
 
+        #Arbre
+        decalage = randint(1, 10*largeur)* 10
+        color('#673d13')
+        begin_fill()
+        penup()
+        self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]- 80))
+        self.immeuble.rectangle(10,45, '#673d13')
+        self.immeuble.move((self.immeuble.get_position()[0]+15 + decalage, self.immeuble.get_position()[1]- 35))
+        end_fill()
+        begin_fill()
+        color('green')
+        circle(30)
+        end_fill()
+        penup()
+
     def dessine(self):
         """
         La méthode dessine la ville en appellant la méthode de la class Immeuble pour dessiner 1 à 1 les Immeubles.
