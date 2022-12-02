@@ -130,6 +130,58 @@ class Immeuble:
         left(90)
 
 
+    def solar_panel(self, longueur,x,y):
+        """
+        Dessine un panneau solaire.
+        """
+        penup()
+        setpos(x,y)
+        pendown()
+        color("#818589")
+        begin_fill()
+        fillcolor("#818589")
+        pos1 = pos()
+        fd(longueur*3)
+        left(90)
+        fd(longueur/2)
+        left(90)
+        fd(5/4*longueur) #-------
+        right(90)
+        fd(longueur*5/2)  # coté  barre
+        left(90) #TOIT DU PANNEAU
+        fd(longueur/2)  # TOIT DU PANNEAU
+        left(90) # TOIT DU PANNEAU
+        fd(longueur/2)  #coté barre
+        z =pos()
+        fd(8/4*longueur) # côté barre
+        right(90)
+        fd(5/4*longueur)#------
+        left(90)
+        fd(longueur/2)
+        penup()
+        setpos(z)
+        pendown()
+        left(135)
+        end_fill()
+        begin_fill()
+        color("#0047AB")
+        fillcolor("#0047AB")
+        fd(longueur*2)
+        left(90)
+        fd(longueur/2)
+        left(90)
+        fd(longueur*4)
+        left(90)
+        fd(longueur/2)
+        left(90)
+        fd(longueur*2)
+        right(45)
+        penup()
+        setpos(pos1)
+        pendown()
+        end_fill()
+        color('black')
+
     def porte(self, color: str):
         """
         Prend en paramètre un str, couleur.
@@ -197,6 +249,9 @@ class Immeuble:
         color = choice(['#430C05', '#D46F4D', '#FFBF66', '#08C5D1', '#00353F'])
         if choice([False, True]):
             self.rectangle(110, 10, color)
+            for i in range(2):
+                if choice([True, False]):
+                    self.solar_panel(10, pos()[0] + 10  + 20*i, pos()[1] + 10)
         else:
             self.triangle(color)
 
@@ -285,7 +340,7 @@ class Ville:
         end_fill()
         left(90)
 
-        #Arbre
+    def arbre(self, largeur):
         decalage = randint(1, 10*largeur)* 10
         color('#673d13')
         begin_fill()
@@ -304,7 +359,7 @@ class Ville:
         """
         La méthode dessine la ville en appellant la méthode de la class Immeuble pour dessiner 1 à 1 les Immeubles.
         """
-        #self.floor(self.nb_batiments) #On dessine le sol.
+        #self.floor(self.nb_batiments) #On dessine le sol.    
         isboulangerie = 0   #Initialise le nb de boulangerie à 0
         self.init((self.immeuble.get_position()[0], self.immeuble.get_position()[1]))
         for i in range(self.nb_batiments):
@@ -317,4 +372,5 @@ class Ville:
                 Immeuble(
                     randint(self.immeuble.get_etage()[0],self.immeuble.get_etage()[1]),         #Nombre d'étages
                     (self.immeuble.get_position()[0] + x, self.immeuble.get_position()[1])      #Position de l'immeuble actuel
-                        ).draw()                                                                #On démarre le dessin de l'immeuble           
+                        ).draw()                                                                #On démarre le dessin de l'immeuble    
+        self.arbre(self.nb_batiments)

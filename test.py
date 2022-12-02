@@ -1,37 +1,59 @@
 from turtle import *
-def porte_en_arc(x, color):
-        fillcolor(color)
+
+speed(100)
+setpos(0,0)
+fd(1000)
+
+def solar_panel(longueur,x,y):
+        """
+        Dessine un panneau solaire.
+        """
+        penup()
+        setpos(x,y)
+        pendown()
+        color("#818589")
         begin_fill()
-        right(180)
-        penup()
-        fd(x/2)
-        pendown()
+        fillcolor("#818589")
+        pos1 = pos()
+        fd(longueur*3)
         left(90)
-        fd(x)
+        fd(longueur/2)
         left(90)
-        fd(x/2)
-        left(90)
-        fd(x)
-        left(90)
-        penup()
-        fd(x/2)
-        pendown()
-        right(180)
-        
-        #Arc de cercle:
-        penup()
+        fd(5/4*longueur) #-------
         right(90)
-        fd(x/4)
+        fd(longueur*5/2)  # coté  barre
+        left(90) #TOIT DU PANNEAU
+        fd(longueur/2)  # TOIT DU PANNEAU
+        left(90) # TOIT DU PANNEAU
+        fd(longueur/2)  #coté barre
+        z =pos()
+        fd(8/4*longueur) # côté barre
+        right(90)
+        fd(5/4*longueur)#------
         left(90)
-        fd(x/4)
-        circle(x/4,extent = 90)
+        fd(longueur/2)
+        penup()
+        setpos(z)
         pendown()
-        circle(x/4,extent = 180)
-
-
+        left(135)
+        end_fill()
+        begin_fill()
+        color("#0047AB")
+        fillcolor("#0047AB")
+        fd(longueur*2)
+        left(90)
+        fd(longueur/2)
+        left(90)
+        fd(longueur*4)
+        left(90)
+        fd(longueur/2)
+        left(90)
+        fd(longueur*2)
+        left(50)
+        penup()
+        setpos(pos1)
+        pendown()
         end_fill()
 
-        left(90)
-
-porte_en_arc(50, 'red')
+solar_panel(20, 0,0)
 done()
