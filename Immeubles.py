@@ -221,7 +221,7 @@ class Immeuble:
             color = choice(['#430C05', '#D46F4D', '#FFBF66', '#08C5D1', '#00353F'])
             
 
-            #On dessin les fenêtres
+            #On dessine les fenêtres
             if i > 0:                     #A l'étage 0 on dessine pas de fenêtre, mais une porte.
                 self.move((pos()[0], pos()[1]+ 10)) #Met la fenêtre au milieu de l'étage.
                 for j in range(3):
