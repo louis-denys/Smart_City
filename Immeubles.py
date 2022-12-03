@@ -176,9 +176,7 @@ class Immeuble:
         left(90)
         fd(longueur*2)
         right(45)
-        penup()
-        setpos(pos1)
-        pendown()
+        self.move(pos1)
         end_fill()
         color('black')
 
@@ -249,9 +247,10 @@ class Immeuble:
         color = choice(['#430C05', '#D46F4D', '#FFBF66', '#08C5D1', '#00353F'])
         if choice([False, True]):
             self.rectangle(110, 10, color)
-            for i in range(2):
-                if choice([True, False]):
-                    self.solar_panel(10, pos()[0] + 10  + 20*i, pos()[1] + 10)
+            top_pos = pos()                 #On sauvegarde la position en haut du toit avant de dessiner les panneaux solaires.
+            for i in range(3):  #3 fois sur le toit on va donner une chance sur deux de dessiner un panneau solaire.
+                if choice([True, False]):   
+                    self.solar_panel(10, top_pos[0] + 10 + 30*i, top_pos[1]+ 10)    #On décale le curseur de 10px vers le haut et de 10px vers la droite.
         else:
             self.triangle(color)
 
@@ -267,6 +266,7 @@ class Ville:
         Prend en paramètre la vitesse et la position de départ.
         Etablie la vitesse et positionne le curseur en position.
         """
+        bgcolor('#87CEEB')
         pencolor('black')        #On définie la couleur
         speed(100)                
         width(1)                 #L'épaisseur du crayon
@@ -340,11 +340,17 @@ class Ville:
         end_fill()
         left(90)
 
-    def arbre(self, largeur):
-        decalage = randint(1, 10*largeur)* 10
+        #Soleil
+        self.immeuble.move((-350, 250))
+        color('Yellow', 'Yellow')
+        begin_fill()
+        circle(75)
+        end_fill()
+        color('black')
+
+    def arbre(self, decalage):
         color('#673d13')
         begin_fill()
-        penup()
         self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]- 80))
         self.immeuble.rectangle(10,45, '#673d13')
         self.immeuble.move((self.immeuble.get_position()[0]+15 + decalage, self.immeuble.get_position()[1]- 35))
@@ -353,13 +359,13 @@ class Ville:
         color('green')
         circle(30)
         end_fill()
-        penup()
+        return decalage
 
     def dessine(self):
         """
         La méthode dessine la ville en appellant la méthode de la class Immeuble pour dessiner 1 à 1 les Immeubles.
         """
-        #self.floor(self.nb_batiments) #On dessine le sol.    
+        self.floor(self.nb_batiments) #On dessine le sol.    
         isboulangerie = 0   #Initialise le nb de boulangerie à 0
         self.init((self.immeuble.get_position()[0], self.immeuble.get_position()[1]))
         for i in range(self.nb_batiments):
@@ -373,4 +379,5 @@ class Ville:
                     randint(self.immeuble.get_etage()[0],self.immeuble.get_etage()[1]),         #Nombre d'étages
                     (self.immeuble.get_position()[0] + x, self.immeuble.get_position()[1])      #Position de l'immeuble actuel
                         ).draw()                                                                #On démarre le dessin de l'immeuble    
-        self.arbre(self.nb_batiments)
+        for i in range(self.nb_batiments):
+            self.arbre(i*110)
