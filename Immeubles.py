@@ -180,6 +180,28 @@ class Immeuble:
         end_fill()
         color('black')
 
+    def flag(self, pos: tuple):
+        """
+        Dessine un drapeau LGBT
+        """
+        self.move(pos)
+        left(90)
+        width(5)
+        fd(50)
+        width(1)
+        right(90)
+        for i in range(6):
+            color(["#FF0018", "#FFA52C", "#FFFF41", "#008018", "#0000F9", "#86007D"][i])
+            self.rectangle(40, 3, ["#FF0018", "#FFA52C", "#FFFF41", "#008018", "#0000F9", "#86007D"][i])
+            penup()
+            left(90)
+            backward(3)
+            right(90)
+            pendown()
+        color('black')
+
+
+
     def porte(self, color: str):
         """
         Prend en paramètre un str, couleur.
@@ -249,8 +271,11 @@ class Immeuble:
             self.rectangle(110, 10, color)
             top_pos = pos()                 #On sauvegarde la position en haut du toit avant de dessiner les panneaux solaires.
             for i in range(3):  #3 fois sur le toit on va donner une chance sur deux de dessiner un panneau solaire.
-                if choice([True, False]):   
+                if i == 2 and choice([True, True, False]):
+                    self.flag((top_pos[0] + 15 + 30*i, top_pos[1]+ 10))
+                elif choice([True, False]):   
                     self.solar_panel(10, top_pos[0] + 10 + 30*i, top_pos[1]+ 10)    #On décale le curseur de 10px vers le haut et de 10px vers la droite.
+                
         else:
             self.triangle(color)
 
@@ -303,11 +328,11 @@ class Ville:
         penup()
         setpos(self.immeuble.get_position()[0]-10, self.immeuble.get_position()[1]- 80)
         pendown()
-        self.immeuble.rectangle(10 + 110*largeur, 100, '#116530')   #La taille du rectangle s'adapte à la longueur de la ville (nb de batiments)
+        self.immeuble.rectangle(10 + 120*largeur, 100, '#116530')   #La taille du rectangle s'adapte à la longueur de la ville (nb de batiments)
         penup()
         setpos((self.immeuble.get_position()[0]-10, self.immeuble.get_position()[1]- 60))
         pendown()
-        self.immeuble.rectangle(10 + 110*largeur, 31, '#333533')
+        self.immeuble.rectangle(10 + 120*largeur, 31, '#333533')
         end_fill()
 
         #Route
@@ -316,9 +341,9 @@ class Ville:
         color('white')
         for i in range(largeur):
             penup()
-            forward(55)
+            forward(60)
             pendown()
-            forward(55)
+            forward(60)
 
         #Voitures
         decalage = randint(1, 10*largeur)* 10
@@ -369,7 +394,7 @@ class Ville:
         isboulangerie = 0   #Initialise le nb de boulangerie à 0
         self.init((self.immeuble.get_position()[0], self.immeuble.get_position()[1]))
         for i in range(self.nb_batiments):
-            x = 110 * i
+            x = 120 * i
 
             if randint(1,3) == 3 and isboulangerie == 0:
                 isboulangerie = 1
@@ -380,4 +405,6 @@ class Ville:
                     (self.immeuble.get_position()[0] + x, self.immeuble.get_position()[1])      #Position de l'immeuble actuel
                         ).draw()                                                                #On démarre le dessin de l'immeuble    
         for i in range(self.nb_batiments):
-            self.arbre(i*110)
+            self.arbre(i*120)
+
+
