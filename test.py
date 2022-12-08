@@ -1,6 +1,5 @@
-from turtle import *
-
-speed(100)
-setpos(0,0)
-fd(1000)
-
+import ctypes
+ 
+usr32 = ctypes.windll.user32
+print("width =", usr32.GetSystemMetrics(0))
+print("height =", usr32.GetSystemMetrics(1))

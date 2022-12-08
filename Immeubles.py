@@ -5,6 +5,9 @@ from turtle import *
 class Immeuble:
 
     def __init__(self, Etages: tuple, Position: tuple) -> None:
+        """
+        On crée un objet avec Immeuble qui prend en paramètre le nombre d'étage et la sa position sur le plan.
+        """
         self.etages = Etages
         self.position = Position
         
@@ -132,7 +135,7 @@ class Immeuble:
 
     def solar_panel(self, longueur,x,y):
         """
-        Dessine un panneau solaire.
+        Dessine un panneau solaire en fonction de la longueur et de la position.
         """
         penup()
         setpos(x,y)
@@ -182,6 +185,7 @@ class Immeuble:
 
     def flag(self, pos: tuple):
         """
+        Prend une position en paramètre et dessine un drapeau à la position passé en paramètre 
         Dessine un drapeau LGBT
         """
         self.move(pos)
@@ -220,7 +224,8 @@ class Immeuble:
 
     def rectangle(self, x: int, y: int, color: str):
         """
-        Prend en paramètre la largeur et la longueur et dessine un rectangle
+        Prend en paramètre la largeur et la longueur et la couleur de remplissage de la forme.
+        Dessine un rectangle en fonction des paramettres corespondant.
         """
         begin_fill()
         fillcolor(color)
@@ -233,6 +238,10 @@ class Immeuble:
 
 
     def draw(self):
+        """
+        La fonction draw permet de dessiner un immeuble sur le plan, 
+        Elle génére aléatoirement la couleur à partir d'un palette prédéfinie.
+        """
         #On définie la position et les attribus du curseur
         self.move(self.get_position())
 
@@ -283,6 +292,9 @@ class Immeuble:
 
 class Ville:
     def __init__(self, nb_batiments, immeuble) -> None:
+        """
+        On définie un objet ville qui prend en paramettre le nombre de batiment et le type d'immeuble à dessiner.
+        """
         self.nb_batiments = nb_batiments
         self.immeuble = immeuble
 
@@ -315,7 +327,7 @@ class Ville:
 
         self.immeuble.rectangle(100, 20, '#FFF6BF')
         forward(2)
-        write("Boulangerie", font=("JetBrains Mono",11, "normal"))
+        write( choice(["Boulangerie", "Coiffeur", "Libraire", "Boucherie"]), font=("JetBrains Mono",11, "normal"))
 
     def floor(self, largeur):
         """
@@ -381,6 +393,9 @@ class Ville:
         color('black')
 
     def lampadaires(self, decalage):
+        """
+        Dessine un lampadaire en fonction d'un décalage par rapport au debut du plan.
+        """
         color('#403d39','#403d39')
         begin_fill()
         self.immeuble.move((self.immeuble.get_position()[0]-10 + decalage, self.immeuble.get_position()[1]+0))
@@ -389,15 +404,10 @@ class Ville:
         self.immeuble.rectangle(5,10, 'yellow')
 
 
-    def pot_de_fleurs(self, decalage):
-        color('#283618','#283618')
-        begin_fill()
-        self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]-80))
-        self.immeuble.rectangle(10,45, '#283618')
-
-
-
     def arbre(self, decalage):
+        """
+        Dessine un arbre en fonction d'un décalage par rapport au debut du plan.
+        """
         color('#673d13')
         begin_fill()
         self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]- 80))
@@ -410,17 +420,10 @@ class Ville:
         end_fill()
         return decalage
 
-    def pot_de_fleurs(self, decalage):
-
-        color('#283618','#283618')
-
-        begin_fill()
-
-        self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]-80))
-
-        self.immeuble.rectangle(10,45, '#283618')
-
     def lampadaires(self, decalage):
+        """
+        Dessine un lampadaire en se décalant par rapport à l'immeuble qu'il vient de dessiner.
+        """
 
         color('#403d39','#403d39')
 
@@ -437,7 +440,7 @@ class Ville:
 
     def dessine(self):
         """
-        La méthode dessine la ville en appellant la méthode de la class Immeuble pour dessiner 1 à 1 les Immeubles.
+        La méthode dessine la ville en appellant les méthodes de la classe Immeuble pour dessiner 1 à 1 les Immeubles.
         """
         self.floor(self.nb_batiments) #On dessine le sol.    
         isboulangerie = 0   #Initialise le nb de boulangerie à 0
@@ -453,8 +456,11 @@ class Ville:
                     randint(self.immeuble.get_etage()[0],self.immeuble.get_etage()[1]),         #Nombre d'étages
                     (self.immeuble.get_position()[0] + x, self.immeuble.get_position()[1])      #Position de l'immeuble actuel
                         ).draw()                                                                #On démarre le dessin de l'immeuble    
-        for i in range(self.nb_batiments):
-            self.lampadaires(i*110)
-            self.pot_de_fleurs(i*110)
-            self.arbre(i*110)
+        for i in range(self.nb_batiments+1):
+            self.lampadaires(i*120)
+            if i == self.nb_batiments:
+                pass
+            else:
+                self.arbre(i*120)
+        hideturtle()
 
