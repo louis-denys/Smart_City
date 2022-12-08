@@ -353,13 +353,13 @@ class Ville:
         begin_fill()
         right(90)
         self.immeuble.rectangle(20,40, '#21B6A8')
-        self.immeuble.move((self.immeuble.get_position()[0]+7 + decalage, self.immeuble.get_position()[1]- 17))
+        self.immeuble.move((self.immeuble.get_position()[0]+7 + decalage, self.immeuble.get_position()[1]- 17)) #Vitres
         self.immeuble.rectangle(10,15, '#6af3cf')
         self.immeuble.move((self.immeuble.get_position()[0]+28 + decalage, self.immeuble.get_position()[1]- 17))
         self.immeuble.rectangle(10,15, '#6af3cf')
         self.immeuble.move((self.immeuble.get_position()[0]-10 + decalage, self.immeuble.get_position()[1]- 25))
         self.immeuble.rectangle(20,80, '#21B6A8')
-        self.immeuble.move((self.immeuble.get_position()[0]+58 + decalage, self.immeuble.get_position()[1]- 27))
+        self.immeuble.move((self.immeuble.get_position()[0]+58 + decalage, self.immeuble.get_position()[1]- 27)) #Feux avants
         self.immeuble.rectangle(10,10, '#f2e743')
 
         end_fill()
@@ -380,6 +380,23 @@ class Ville:
         end_fill()
         color('black')
 
+    def lampadaires(self, decalage):
+        color('#403d39','#403d39')
+        begin_fill()
+        self.immeuble.move((self.immeuble.get_position()[0]-10 + decalage, self.immeuble.get_position()[1]+0))
+        self.immeuble.rectangle(5,45, '#403d39')
+        self.immeuble.move((self.immeuble.get_position()[0]-10 + decalage, self.immeuble.get_position()[1]+45))
+        self.immeuble.rectangle(5,10, 'yellow')
+
+
+    def pot_de_fleurs(self, decalage):
+        color('#283618','#283618')
+        begin_fill()
+        self.immeuble.move((self.immeuble.get_position()[0]+10 + decalage, self.immeuble.get_position()[1]-80))
+        self.immeuble.rectangle(10,45, '#283618')
+
+
+
     def arbre(self, decalage):
         color('#673d13')
         begin_fill()
@@ -393,6 +410,7 @@ class Ville:
         end_fill()
         return decalage
 
+<<<<<<< HEAD
     def pot_de_fleurs(self, decalage):
 
         color('#283618','#283618')
@@ -416,6 +434,9 @@ class Ville:
         self.immeuble.move((self.immeuble.get_position()[0]-10 + decalage, self.immeuble.get_position()[1]+45))
 
         self.immeuble.rectangle(5,10, 'yellow')
+=======
+
+>>>>>>> 4c4b1d13b91a04fcdb92124892da9f43e4e2b838
 
     def dessine(self):
         """
@@ -436,10 +457,16 @@ class Ville:
                     (self.immeuble.get_position()[0] + x, self.immeuble.get_position()[1])      #Position de l'immeuble actuel
                         ).draw()                                                                #On démarre le dessin de l'immeuble    
         for i in range(self.nb_batiments):
+<<<<<<< HEAD
             self.lampadaires(i*120)
 
             #self.pot_de_fleurs(i*120)
 
             self.arbre(i*120)
 
+=======
+            self.lampadaires(i*110)
+            self.pot_de_fleurs(i*110)
+            self.arbre(i*110)
+>>>>>>> 4c4b1d13b91a04fcdb92124892da9f43e4e2b838
 
