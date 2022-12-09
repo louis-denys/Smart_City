@@ -1,6 +1,5 @@
 from turtle import *
 from Immeubles import *
-from random import randint
 import ctypes
 
 #On récupère les données d'utilisateur depuis le module ctypes.
